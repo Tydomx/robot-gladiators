@@ -1,18 +1,27 @@
+// Game States
+// "Win" - Player robot has defeated all enemy-robots
+//  * Fight all enemy-robots
+//  * Defeat each enemy-robot
+// "Lose" - Player robot's health is zero or less
+
+
 // inputting user name
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
-console.log(playerName, playerHealth, playerAttack);
 
-// enemy robot
-var enemyName = "Roborto";
+// enemy robots, health, attack
+var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
-console.log(enemyName, enemyHealth, enemyAttack);
+
+// end of global variables
+
+
 
 // this creates a function expression named "fight"
-var fight = function () {
+var fight = function(enemyName) {
     // Alert players that they are starting the round
     window.alert("Welcome to Robot Gladiators!");
     // asking player if they want to fight or skip the battle
@@ -23,7 +32,7 @@ var fight = function () {
         // remove enemy's health by subtracting the amount set in the playerAttack variable
         enemyHealth = enemyHealth - playerAttack;
         console.log(playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining.");
-        
+
         // check enemy's health
         if (enemyHealth <= 0) {
             window.alert(enemyName + " has died!");
@@ -45,7 +54,7 @@ var fight = function () {
         // if player choses to skip
     } else if (promptFight === "skip" || promptFight === "SKIP") {
         // confirm player wants to skip
-        var confirmSkip = window.confirm("Are you sure you want to quit?"); 
+        var confirmSkip = window.confirm("Are you sure you want to quit?");
 
         // if yes (true), leave fight
         if (confirmSkip) {
@@ -57,14 +66,15 @@ var fight = function () {
         else {
             fight();
         }
-    
+
     } else {
         window.alert("You need to choose a valid option. Try again!");
     }
-    
+
 
 };
 
-
-
-fight();
+// calls fight() function multiple times using the element in enemyNames[i]
+for (var i = 0; i < enemyNames.length; i++) {
+    fight(enemyNames[i]);
+};
